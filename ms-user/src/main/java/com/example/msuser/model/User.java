@@ -13,6 +13,8 @@ public class User {
     private Long id;
     @Column(unique = true, nullable = false)
     private String username;
+    @Column(unique = true)
+    private String email;
     @Column(nullable = false)
     private String password;
 
@@ -28,6 +30,9 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

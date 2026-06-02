@@ -1,10 +1,15 @@
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\controller\AuthController.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\CustomUserDetailsService.java
-C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\Role.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\controller\RequestCodeController.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\repository\RoleRepository.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\repository\UserRepository.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\User.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\SecurityConfig.java
-C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtAuthenticationFilter.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtTokenUtil.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\config\RabbitConfig.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\Role.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtAuthenticationFilter.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\dto\EmailDTO.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\MsUserApplication.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\mq\UserProducer.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\service\CodigoCacheService.java

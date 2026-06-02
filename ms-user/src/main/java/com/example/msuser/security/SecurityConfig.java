@@ -25,7 +25,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers(org.springframework.http.HttpMethod.POST, "/users", "/users/login").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.POST, "/users", "/users/login", "/auth/request-code").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/users/test/customer").hasRole("CUSTOMER")
                         .anyRequest().authenticated()
                 )

@@ -1,1 +1,4 @@
+com\example\msemail\config\RabbitConfig.class
+com\example\msemail\mq\EmailConsumer.class
 com\example\msemail\EmailServiceApplication.class
+com\example\msemail\dto\EmailDTO.class
