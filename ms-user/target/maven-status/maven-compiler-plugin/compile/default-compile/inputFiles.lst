@@ -1,0 +1,10 @@
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\controller\AuthController.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\CustomUserDetailsService.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\Role.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\repository\RoleRepository.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\repository\UserRepository.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\User.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\SecurityConfig.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtAuthenticationFilter.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtTokenUtil.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\MsUserApplication.java
