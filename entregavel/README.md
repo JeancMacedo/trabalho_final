@@ -1,8 +1,11 @@
 # Entregável
 
-- `dashboard-token.png`: captura da tela final com o JWT salvo no dashboard.
-- Apenas o e-mail SMTP e a senha SMTP foram movidos para variáveis de ambiente.
+- `etapa4-dashboard-final.png`: captura da tela final com o dashboard, o perfil e o endpoint protegido validado.
+- `dashboard-token.png`: captura anterior do dashboard com o JWT.
+- A pasta reúne a evidência visual da última entrega da atividade.
 
-## Variáveis esperadas
-- `SMTP_USER`
-- `SMTP_PASSWORD`
+## Itens principais
+
+- Fluxo de validação do código.
+- Cadastro de nome e cargo.
+- Dashboard com teste de endpoint protegido e consulta de perfil.

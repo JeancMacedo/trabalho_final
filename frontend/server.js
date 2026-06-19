@@ -17,9 +17,71 @@ app.get('/verify', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'verify.html'));
 });
 
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'register.html'));
+});
+
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
+
+function forwardAuth(req) {
+  const authorization = req.get('authorization');
+  return authorization ? { Authorization: authorization } : {};
+}
+
+async function proxyText(req, res, targetPath, method = 'GET', body = undefined) {
+  try {
+    const response = await fetch(`${userServiceBaseUrl}${targetPath}`, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        ...forwardAuth(req)
+      },
+      body: body === undefined ? undefined : JSON.stringify(body)
+    });
+
+    const text = await response.text();
+    if (!response.ok) {
+      return res.status(response.status).send(text || 'Falha ao processar requisição');
+    }
+
+    return res.type(response.headers.get('content-type') || 'text/plain').send(text);
+  } catch (error) {
+    return res.status(500).send('Erro ao conectar no User Service');
+  }
+}
+
+async function proxyJson(req, res, targetPath, method = 'GET', body = undefined) {
+  try {
+    const response = await fetch(`${userServiceBaseUrl}${targetPath}`, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        ...forwardAuth(req)
+      },
+      body: body === undefined ? undefined : JSON.stringify(body)
+    });
+
+    const payloadText = await response.text();
+    let payload;
+    try {
+      payload = payloadText ? JSON.parse(payloadText) : {};
+    } catch {
+      payload = { message: payloadText };
+    }
+
+    if (!response.ok) {
+      return res.status(response.status).json({
+        message: payload.message || payloadText || 'Falha ao processar requisição'
+      });
+    }
+
+    return res.json(payload);
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro ao conectar no User Service' });
+  }
+}
 
 app.post('/send-code', async (req, res) => {
   const email = String(req.body.email || '').trim().toLowerCase();
@@ -83,6 +145,25 @@ app.post('/verify-code', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: 'Erro ao conectar no User Service' });
   }
+});
+
+app.post('/register', async (req, res) => {
+  const name = String(req.body.name || '').trim();
+  const role = String(req.body.role || 'ROLE_CUSTOMER').trim();
+
+  if (!name) {
+    return res.status(400).json({ message: 'Nome é obrigatório' });
+  }
+
+  return proxyJson(req, res, '/users/update-profile', 'POST', { name, role });
+});
+
+app.get('/api/protected', async (req, res) => {
+  return proxyText(req, res, '/users/test/customer', 'GET');
+});
+
+app.get('/users/me', async (req, res) => {
+  return proxyJson(req, res, '/users/me', 'GET');
 });
 
 app.listen(port, () => {

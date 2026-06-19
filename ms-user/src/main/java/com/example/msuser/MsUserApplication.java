@@ -17,9 +17,14 @@ public class MsUserApplication {
     @Bean
     CommandLineRunner init(RoleRepository roleRepository) {
         return args -> {
-            if (roleRepository.count() == 0) {
+            if (roleRepository.findByName("ROLE_CUSTOMER").isEmpty()) {
                 roleRepository.save(new Role(null, "ROLE_CUSTOMER"));
+            }
+            if (roleRepository.findByName("ROLE_ADMIN").isEmpty()) {
                 roleRepository.save(new Role(null, "ROLE_ADMIN"));
+            }
+            if (roleRepository.findByName("ROLE_ADMINISTRATOR").isEmpty()) {
+                roleRepository.save(new Role(null, "ROLE_ADMINISTRATOR"));
             }
         };
     }

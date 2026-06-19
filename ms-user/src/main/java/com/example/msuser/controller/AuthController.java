@@ -11,11 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.msuser.dto.UpdateProfileDto;
+import com.example.msuser.dto.UserProfileDto;
 import com.example.msuser.model.Role;
 import com.example.msuser.model.User;
 import com.example.msuser.repository.RoleRepository;
 import com.example.msuser.repository.UserRepository;
 import com.example.msuser.security.JwtTokenUtil;
+import com.example.msuser.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -32,6 +35,8 @@ public class AuthController {
     AuthenticationManager authenticationManager;
     @Autowired
     JwtTokenUtil jwtUtils;
+    @Autowired
+    UserService userService;
 
     record CreateUserRequest(String username, String password, String role) {}
     record LoginRequest(String username, String password) {}
@@ -59,7 +64,18 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    @org.springframework.security.access.prepost.PreAuthorize("hasRole('CUSTOMER')")
+    @PostMapping("/update-profile")
+    public ResponseEntity<UserProfileDto> updateProfile(Authentication authentication,
+                                                        @RequestBody UpdateProfileDto dto) {
+        return ResponseEntity.ok(userService.updateProfile(authentication.getName(), dto));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserProfileDto> me(Authentication authentication) {
+        return ResponseEntity.ok(userService.getProfile(authentication.getName()));
+    }
+
+    @org.springframework.security.access.prepost.PreAuthorize("hasAnyRole('CUSTOMER', 'ADMINISTRATOR')")
     @GetMapping("/test/customer")
     public ResponseEntity<?> testCustomer() {
         return ResponseEntity.ok("OK - customer access");

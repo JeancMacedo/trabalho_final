@@ -26,7 +26,8 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers(org.springframework.http.HttpMethod.POST, "/users", "/users/login", "/auth/request-code", "/auth/verify-code").permitAll()
-                .requestMatchers(org.springframework.http.HttpMethod.GET, "/users/test/customer").hasRole("CUSTOMER")
+            .requestMatchers(org.springframework.http.HttpMethod.GET, "/users/test/customer", "/users/me").authenticated()
+            .requestMatchers(org.springframework.http.HttpMethod.POST, "/users/update-profile").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

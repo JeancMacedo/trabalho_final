@@ -83,7 +83,7 @@ public class RequestCodeController {
                 .orElseThrow(() -> new IllegalArgumentException("User not found for email: " + email));
 
         UserDetails principal = new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
+            user.getEmail() != null ? user.getEmail() : user.getUsername(),
                 user.getPassword(),
                 user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).toList());
 

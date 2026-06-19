@@ -41,7 +41,9 @@ public class EmailService {
 
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(emailFrom);
+            if (emailFrom != null && !emailFrom.isBlank()) {
+                message.setFrom(emailFrom);
+            }
             message.setTo(dto.getEmailTo());
             message.setSubject(dto.getSubject());
             message.setText(dto.getText());

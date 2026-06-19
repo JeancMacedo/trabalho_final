@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Validar código</title>
   <style>
-    :root { --bg:#111827; --card:#0b1220; --text:#e5e7eb; --muted:#94a3b8; --accent:#f97316; --accent2:#facc15; --error:#fb7185; }
+    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#94a3b8; --accent:#38bdf8; --accent2:#22c55e; --error:#fb7185; }
     * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; font-family:Arial, Helvetica, sans-serif; color:var(--text); background:linear-gradient(160deg, #111827, #1f2937 55%, #020617); display:grid; place-items:center; padding:24px; }
-    .card { width:min(100%, 560px); background:rgba(11,18,32,.94); border:1px solid rgba(148,163,184,.18); border-radius:20px; padding:32px; box-shadow:0 24px 80px rgba(0,0,0,.35); }
+    body { margin:0; min-height:100vh; font-family:Arial, Helvetica, sans-serif; color:var(--text); background:radial-gradient(circle at top, #1e293b 0, #0f172a 45%, #020617 100%); display:grid; place-items:center; padding:24px; }
+    .card { width:min(100%, 560px); background:rgba(17,24,39,.94); border:1px solid rgba(148,163,184,.18); border-radius:22px; padding:32px; box-shadow:0 24px 80px rgba(0,0,0,.35); }
     h1 { margin:0 0 12px; font-size:2rem; }
     p { margin:0 0 24px; color:var(--muted); line-height:1.5; }
     label { display:block; margin:0 0 8px; font-weight:700; }
-    input { width:100%; padding:14px 16px; border-radius:12px; border:1px solid rgba(148,163,184,.25); background:#0f172a; color:var(--text); font-size:1rem; }
-    button { margin-top:18px; width:100%; padding:14px 16px; border:0; border-radius:12px; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#1f1300; font-weight:800; font-size:1rem; cursor:pointer; }
+    input { width:100%; padding:14px 16px; border-radius:12px; border:1px solid rgba(148,163,184,.25); background:#0b1220; color:var(--text); font-size:1rem; }
+    button { margin-top:18px; width:100%; padding:14px 16px; border:0; border-radius:12px; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#03111f; font-weight:800; font-size:1rem; cursor:pointer; }
     .message { margin-top:16px; min-height:24px; font-size:.96rem; }
     .error { color:var(--error); }
     .success { color:#4ade80; }
@@ -23,7 +23,7 @@
 <body>
   <main class="card">
     <h1>Validar código</h1>
-    <p>Digite o e-mail e o código recebido. Se for válido, o JWT ficará salvo na sessão e você será levado para o dashboard.</p>
+    <p>Digite o e-mail e o código recebido. Em seguida você será levado para o cadastro de nome e cargo.</p>
     <form id="verify-form">
       <div class="row">
         <div>
@@ -74,10 +74,10 @@
         }
 
         sessionStorage.setItem('jwtToken', payload.token);
-        sessionStorage.setItem('userEmail', emailField.value);
-        message.textContent = 'Código validado. Redirecionando...';
+        sessionStorage.setItem('pendingEmail', emailField.value);
+        message.textContent = 'Código validado. Redirecionando para o cadastro...';
         message.className = 'message success';
-        window.location.href = '/dashboard';
+        window.location.href = `/register?email=${encodeURIComponent(emailField.value)}`;
       } catch (error) {
         message.textContent = 'Falha ao validar o código.';
         message.className = 'message error';
