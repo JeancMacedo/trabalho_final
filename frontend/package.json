@@ -1,0 +1,13 @@
+{
+  "name": "frontend-etapa-3",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend Node.js para solicitacao e validacao de codigo OTP",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

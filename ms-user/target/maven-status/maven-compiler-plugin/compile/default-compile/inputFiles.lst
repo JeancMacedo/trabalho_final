@@ -6,6 +6,7 @@ C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\e
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\User.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\SecurityConfig.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtTokenUtil.java
+C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\dto\EmailRecordDto.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\config\RabbitConfig.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\model\Role.java
 C:\Users\jeanc\Desktop\Trabalho_Final\trabalho_final\ms-user\src\main\java\com\example\msuser\security\JwtAuthenticationFilter.java

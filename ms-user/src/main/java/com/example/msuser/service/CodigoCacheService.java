@@ -42,6 +42,22 @@ public class CodigoCacheService {
         return e.code;
     }
 
+    public boolean consumeCode(String email, String code) {
+        String normalizedEmail = email.toLowerCase();
+        Entry e = cache.get(normalizedEmail);
+        if (e == null) {
+            return false;
+        }
+        if (Instant.now().isAfter(e.expiresAt) || !e.code.equals(code)) {
+            if (Instant.now().isAfter(e.expiresAt)) {
+                cache.remove(normalizedEmail);
+            }
+            return false;
+        }
+        cache.remove(normalizedEmail);
+        return true;
+    }
+
     private void cleanup() {
         Instant now = Instant.now();
         cache.entrySet().removeIf(en -> en.getValue().expiresAt.isBefore(now));

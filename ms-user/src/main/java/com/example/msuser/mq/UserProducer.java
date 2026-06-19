@@ -4,7 +4,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.example.msuser.dto.EmailDTO;
+import com.example.msuser.dto.EmailRecordDto;
 
 @Service
 public class UserProducer {
@@ -16,7 +16,7 @@ public class UserProducer {
         this.queueName = queueName;
     }
 
-    public void sendEmail(EmailDTO dto) {
+    public void sendEmail(EmailRecordDto dto) {
         rabbitTemplate.convertAndSend(queueName, dto);
     }
 }

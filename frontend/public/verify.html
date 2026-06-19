@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Validar código</title>
+  <style>
+    :root { --bg:#111827; --card:#0b1220; --text:#e5e7eb; --muted:#94a3b8; --accent:#f97316; --accent2:#facc15; --error:#fb7185; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Arial, Helvetica, sans-serif; color:var(--text); background:linear-gradient(160deg, #111827, #1f2937 55%, #020617); display:grid; place-items:center; padding:24px; }
+    .card { width:min(100%, 560px); background:rgba(11,18,32,.94); border:1px solid rgba(148,163,184,.18); border-radius:20px; padding:32px; box-shadow:0 24px 80px rgba(0,0,0,.35); }
+    h1 { margin:0 0 12px; font-size:2rem; }
+    p { margin:0 0 24px; color:var(--muted); line-height:1.5; }
+    label { display:block; margin:0 0 8px; font-weight:700; }
+    input { width:100%; padding:14px 16px; border-radius:12px; border:1px solid rgba(148,163,184,.25); background:#0f172a; color:var(--text); font-size:1rem; }
+    button { margin-top:18px; width:100%; padding:14px 16px; border:0; border-radius:12px; background:linear-gradient(135deg, var(--accent), var(--accent2)); color:#1f1300; font-weight:800; font-size:1rem; cursor:pointer; }
+    .message { margin-top:16px; min-height:24px; font-size:.96rem; }
+    .error { color:var(--error); }
+    .success { color:#4ade80; }
+    .row { display:grid; gap:14px; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Validar código</h1>
+    <p>Digite o e-mail e o código recebido. Se for válido, o JWT ficará salvo na sessão e você será levado para o dashboard.</p>
+    <form id="verify-form">
+      <div class="row">
+        <div>
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <div>
+          <label for="code">Código</label>
+          <input id="code" name="code" type="text" inputmode="numeric" maxlength="6" placeholder="123456" required />
+        </div>
+      </div>
+      <button type="submit">Validar código</button>
+    </form>
+    <div id="message" class="message"></div>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const emailField = document.getElementById('email');
+    const codeField = document.getElementById('code');
+    const message = document.getElementById('message');
+    const form = document.getElementById('verify-form');
+
+    if (params.get('email')) {
+      emailField.value = params.get('email');
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      message.textContent = 'Validando...';
+      message.className = 'message';
+
+      try {
+        const response = await fetch('/verify-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: emailField.value,
+            code: codeField.value
+          })
+        });
+
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          message.textContent = payload.message || 'Código inválido ou expirado.';
+          message.className = 'message error';
+          return;
+        }
+
+        sessionStorage.setItem('jwtToken', payload.token);
+        sessionStorage.setItem('userEmail', emailField.value);
+        message.textContent = 'Código validado. Redirecionando...';
+        message.className = 'message success';
+        window.location.href = '/dashboard';
+      } catch (error) {
+        message.textContent = 'Falha ao validar o código.';
+        message.className = 'message error';
+      }
+    });
+  </script>
+</body>
+</html>
